@@ -25,12 +25,12 @@ app.get('/posts/:id', async (req, res) => {
     res.send(posts)
 });
 
-app.post('/post', (req, res) => {
+app.post('/post', auth.checkAuthenticated, (req, res) => {
     var postData = req.body
-    postData.author = '5a05aaa2c6c6b852d4be1e07'
+    postData.author = req.userId
 
     var post = new Post(postData)
-    console.log(post)
+    //console.log(post)
     post.save((err, result) => {
         if (err){
             console.log('saving post error')
@@ -56,7 +56,7 @@ app.get('/users', auth.checkAuthenticated, async (req, res) =>
 
 app.get('/profile/:id', async (req, res) => 
 {
-    console.log(req.params.id)
+    //console.log(req.params.id)
     try
     {
         var user = await User.findById( req.params.id, '-pwd -__v' )
@@ -80,4 +80,4 @@ mongoose.connect('mongodb://xperiment:xperiment@ds151955.mlab.com:51955/xperimen
 
 app.use('/auth', auth.router)
 
-app.listen(6799)
+app.listen(process.env.PORT || 6799)
