@@ -7,6 +7,7 @@ var User = require('./models/User')
 var auth = require('./auth')
 var Post = require('./models/Post')
 var jwt = require('jwt-simple')
+require('dotenv/config')
 
 mongoose.Promise = Promise
 
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
     res.send('hello world')
 });
 
-app.get('/posts/:id', async (req, res) => {
+app.get('/posts/:id', auth.checkAuthenticated, async (req, res) => {
     var author = req.params.id
     var posts = await Post.find({author})
     res.send(posts)
@@ -45,6 +46,7 @@ app.get('/users', auth.checkAuthenticated, async (req, res) =>
     try
     {
         var users = await User.find( {  }, '-pwd -__v' )
+        //console.log(users)
         res.send(users)
     }
     catch(error)
@@ -69,9 +71,11 @@ app.get('/profile/:id', async (req, res) =>
     }
 });
 
-
 //mongoose.connect('mongodb://localhost:27017/xperiment-mongodb', { useMongoClient: true }, (err) => {
-mongoose.connect('mongodb://xperiment:xperiment@ds151955.mlab.com:51955/xperiment-mongodb', { useMongoClient: true }, (err) => {
+mongoose.connect('mongodb://' + process.env.MONGO_DB_USER + ':' + process.env.MONGO_DB_PASS + '@' +  
+                                process.env.MONGO_DB_HOST + ':' + process.env.MONGO_DB_HOST_PORT + '/' + process.env.MONGO_DB_NAME, 
+                                { useMongoClient: true }, (err) => {
+                                    
     if (err)
         console.log(err)
     else
