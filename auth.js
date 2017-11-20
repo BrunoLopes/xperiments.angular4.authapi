@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
 function createSendToken(res, user){
     var payload = { sub: user._id }
     
-    var expires = moment().add(2, 'minutes').valueOf()
+    var expires = moment().add(1, 'minutes').valueOf()
 
     var token = jwt.encode({ payload, exp: expires }, process.env.JWT_SECRET_KEY)
     res.status(200).send({token: token})
