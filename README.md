@@ -12,13 +12,13 @@ Run `npm install` for get api packages and dependencies installed.
 
 ### Database access configuration
 
-Configure .env file full filling the mongodb access configuration properties:.. 
-MONGO_DB_HOST= `mongodb host`..
-MONGO_DB_HOST_PORT= `mongodb host port`..
-MONGO_DB_NAME= `mongodb databse name`..
-MONGO_DB_USER= `mongodb user`..
-MONGO_DB_PASS= `mongodb user password`..
-JWT_SECRET_KEY= `jwt secret key`
+Configure .env file full filling the mongodb access configuration properties:
+*MONGO_DB_HOST*= `mongodb host`
+*MONGO_DB_HOST_PORT*= `mongodb host port`
+*MONGO_DB_NAME*= `mongodb databse name`
+*MONGO_DB_USER*= `mongodb user`
+*MONGO_DB_PASS*= `mongodb user password`
+*JWT_SECRET_KEY*= `jwt secret key`
 
 ### Seeding database
 
