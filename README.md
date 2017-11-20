@@ -13,4 +13,4 @@ Run `npm seed` to seed the database with some data with default credential teste
 
 ## Further improvements
 
-Due implementation of OAuth 2 protocol and as always some refactoring
+Due implementation of OAuth 2 protocol and as always some code refactoring
